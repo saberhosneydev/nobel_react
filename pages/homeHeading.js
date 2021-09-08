@@ -1,4 +1,23 @@
+import { useRouter } from 'next/router'
 export default function homeHeading() {
+    const router = useRouter();
+    function addItemToRecentSearch(item) {
+        if (localStorage.getItem('recentSearchItems')) {
+            let current = localStorage.getItem('recentSearchItems').split(",");
+            if (current.length < 5) {
+                current.push(item);
+                localStorage.setItem('recentSearchItems', current);
+            } else {
+                current.shift();
+                current.push(item);
+                localStorage.setItem('recentSearchItems', current);
+            }
+        } else {
+            let current = [];
+            current.push(item);
+            localStorage.setItem('recentSearchItems', current);
+        }
+    }
     return (
         <div className="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8 mt-16">
             <div className="relative">
@@ -10,7 +29,13 @@ export default function homeHeading() {
                         Search for the greatest humans in history!
                     </p>
                 </div>
-                <form action="#" className="mt-12 sm:mx-auto sm:max-w-lg sm:flex">
+                <form action="#" className="mt-12 sm:mx-auto sm:max-w-lg sm:flex" onSubmit={(e) => {
+                    let element = document.querySelector('#mainSearch');
+                    e.preventDefault();
+                    addItemToRecentSearch(element.value);
+                    router.push(`/search/${element.value}`);
+                    element.value = "";
+                }}>
                     <div className="min-w-0 flex-1">
                         <label htmlFor="mainSearch" className="sr-only">
                             Search
