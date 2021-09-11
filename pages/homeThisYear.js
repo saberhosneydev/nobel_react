@@ -3,10 +3,21 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import LaureateCard from "../components/laureateCard";
 export default function HomeThisYear() {
-    const [nobelPrizes, setNobelPrizes] = useState([])
+    const [nobelPrizes, setNobelPrizes] = useState([]);
+    const [secondFetch, setSecondFetch] = useState(false);
+    let year = new Date().getUTCFullYear();
     useEffect(() => {
-        axios.get("https://api.nobelprize.org/2.1/nobelPrizes?nobelPrizeYear=2020").then((response) => {
-            setNobelPrizes(response.data.nobelPrizes);
+        axios.get(`https://api.nobelprize.org/2.1/nobelPrizes?nobelPrizeYear=${year}`).then((response) => {
+            if (response.data.meta.count == 0) {
+                axios.get(`https://api.nobelprize.org/2.1/nobelPrizes?nobelPrizeYear=${year - 1}`).then((res) => {
+                    setSecondFetch(true);
+                    setNobelPrizes(res.data.nobelPrizes);
+                });
+            } else {
+                setNobelPrizes(response.data.nobelPrizes);
+            }
+        }).catch((error) => {
+            console.log(error);
         });
     }, [])
     return (
@@ -14,6 +25,7 @@ export default function HomeThisYear() {
             <h2 className="text-center text-3xl font-black text-yellow-600 tracking-tight sm:text-4xl uppercase mb-8">
                 this year&apos;s winners
             </h2>
+            {secondFetch && <p className="text-sm text-center -mt-4">The winners of {year} are yet to be announced, so we are displaying winners of {year - 1}</p>}
             {
                 nobelPrizes.map((prize, index) => (
                     <div className="my-6" key={index}>

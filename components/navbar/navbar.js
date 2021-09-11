@@ -26,7 +26,12 @@ export default function Navbar() {
         }
     }
     useEffect(() => {
-        setRecentSearchItems(localStorage.getItem('recentSearchItems').split(","));
+        if (localStorage.getItem('recentSearchItems')) {
+            setRecentSearchItems(localStorage.getItem('recentSearchItems').split(","));
+        } else {
+            localStorage.setItem('recentSearchItems', []);
+            setRecentSearchItems(localStorage.getItem('recentSearchItems').split(","));
+        }
     }, [])
     return (
         <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 pb-4 bg-white overflow-y-auto w-64 h-screen">

@@ -1,10 +1,10 @@
-import axios from "axios";
+import laureates from '../../data/laureates.json'
 import Link from 'next/link'
 export default function Laureate({ person }) {
 
     return (
         <>
-            {person.id ? <div className="sm:rounded-lg">
+            {person?.id ? <div className="sm:rounded-lg">
                 <div className="px-4 py-5 sm:px-6">
                     <h3 className="text-xl leading-6 font-medium text-yellow-600">Laureate Information</h3>
                     <p className="mt-1 max-w-2xl text-base text-gray-500">Personal details and nobel prizes.</p>
@@ -90,12 +90,34 @@ export default function Laureate({ person }) {
     )
 }
 
+// This function gets called at build time
+export async function getStaticPaths() {
+    // Get the paths we want to pre-render based on posts
+    const paths = laureates.laureates.map((laureate) => ({
+        params: { id: laureate.id },
+    }))
 
-export async function getServerSideProps(context) {
-    let url = "https://api.nobelprize.org/2.1/laureate/" + context.params.id;
-    const response = await axios.get(url);
-    let person = response.data[0];
+    // We'll pre-render only these paths at build time.
+    // { fallback: false } means other routes should 404.
+    return { paths, fallback: false }
+}
 
-    // Pass data to the page via props
+// This also gets called at build time
+export async function getStaticProps({ params }) {
+    let fetch = laureates.laureates.filter((laureate) => {
+        if (laureate.id == params.id) {
+            return laureate;
+        }
+    });
+    let person = fetch[0];
+    // Pass post data to the page via props
     return { props: { person } }
 }
+// export async function getServerSideProps(context) {
+//     let url = "https://api.nobelprize.org/2.1/laureate/" + context.params.id;
+//     const response = await axios.get(url);
+//     let person = response.data[0];
+
+//     // Pass data to the page via props
+//     return { props: { person } }
+// }

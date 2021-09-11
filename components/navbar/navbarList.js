@@ -9,7 +9,7 @@ export default function NavbarList() {
     const router = useRouter();
     const navigation = [
         { name: 'Home', icon: HomeIcon, href: '/', id: 0 },
-        { name: 'Laureates', icon: UsersIcon, href: '#', id: 1 },
+        { name: 'Laureates', icon: UsersIcon, href: '/laureates/0', id: 1 },
         { name: 'Advanced Search', icon: SearchIcon, href: '#', id: 2 },
         { name: 'About', icon: InformationCircleIcon, href: '/about', id: 3 },
     ]
