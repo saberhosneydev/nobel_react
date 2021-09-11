@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import Link from 'next/link'
 export default function Laureate({ person }) {
 
     return (
@@ -29,18 +29,18 @@ export default function Laureate({ person }) {
                         </div>
                         <div className="sm:col-span-1">
                             <dt className="text-base font-medium text-yellow-600">Wikipedia</dt>
-                            <dd className="mt-1 text-base text-blue-600 underline"><a target="_blank" href={person.wikipedia.english}>{person.wikipedia.slug}</a></dd>
+                            <dd className="mt-1 text-base text-blue-600 underline"><a target="_blank" rel="external noreferrer" href={person.wikipedia.english}>{person.wikipedia.slug}</a></dd>
                         </div>
                         <div className="sm:col-span-1">
                             <dt className="text-base font-medium text-yellow-600">Wikidata</dt>
-                            <dd className="mt-1 text-base text-blue-600 underline"><a target="_blank" href={person.wikidata.url}>{person.wikidata.id}</a></dd>
+                            <dd className="mt-1 text-base text-blue-600 underline"><a target="_blank" rel="external noreferrer" href={person.wikidata.url}>{person.wikidata.id}</a></dd>
                         </div>
                         <div className="sm:col-span-2">
                             <dt className="text-xl font-medium text-yellow-600">Prize details</dt>
                             <dd className="mt-1 text-gray-900 ml-4">
-                                {person.nobelPrizes.map((prize) => (
-                                    <>
-                                        <dl className="grid grid-cols-3 gap-x-4 gap-y-8 text-sm">
+                                {person.nobelPrizes.map((prize, index) => (
+                                    <div key={index}>
+                                        <dl className="grid grid-cols-3 gap-x-4 gap-y-8 text-sm" >
                                             <div className="sm:col-span-1">
                                                 <dt className="text-base font-medium text-yellow-600">Awarding year</dt>
                                                 <dd className="mt-1 text-base text-gray-900">{prize.awardYear}</dd>
@@ -65,8 +65,8 @@ export default function Laureate({ person }) {
                                                 <dt className="text-base font-medium text-yellow-600">Affiliations</dt>
                                                 <dd className="mt-1 text-base text-gray-900">
                                                     <ol>
-                                                        {prize.affiliations.map((affiliate) => (
-                                                            <h1>{affiliate.name.en} | {affiliate.locationString.en}</h1>
+                                                        {prize.affiliations.map((affiliate, index) => (
+                                                            <p key={index}>{affiliate.name.en} | {affiliate.locationString.en}</p>
                                                         ))}
                                                     </ol>
                                                 </dd>
@@ -74,7 +74,7 @@ export default function Laureate({ person }) {
 
                                         </dl>
                                         {person.nobelPrizes.length > 1 ? <hr className="w-full border-b-2 border-yellow-600 mx-auto" /> : ''}
-                                    </>
+                                    </div>
                                 ))}
                             </dd>
                         </div>
@@ -83,7 +83,7 @@ export default function Laureate({ person }) {
             </div> : <div className="flex flex-col items-center h-screen justify-center">
                 <h1 className="text-yellow-600 text-2xl font-black uppercase">This laureate id does not exist</h1>
                 <p>
-                    you could use the search from the left panel or go <a href="/" className="underline text-blue-600">Home</a>
+                    you could use the search from the left panel or go <Link href="/"><a className="underline text-blue-600">Homepage</a></Link>
                 </p>
             </div>}
         </>

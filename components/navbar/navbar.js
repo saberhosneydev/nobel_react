@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import NavbarList from './navbarList';
 import NavbarRecentSearch from './navbarRecentSearch';
 import NavbarSearchBox from './navbarSearchBox';
+import Link from 'next/link'
 export default function Navbar() {
     const [recentSearchItems, setRecentSearchItems] = useState([])
     function addItemToRecentSearch(item) {
@@ -26,11 +27,11 @@ export default function Navbar() {
     }
     useEffect(() => {
         setRecentSearchItems(localStorage.getItem('recentSearchItems').split(","));
-    })
+    }, [])
     return (
         <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 pb-4 bg-white overflow-y-auto w-64 h-screen">
             <div className="flex items-center flex-shrink-0 px-4">
-                <h1 className="font-black text-yellow-600 capitalize text-xl">The nobel prize</h1>
+                <Link href="/"><a className="font-black text-yellow-600 capitalize text-xl">The nobel prize</a></Link>
             </div>
             <div className="mt-5 flex-grow flex flex-col">
                 <nav className="flex-1 px-2 space-y-8 bg-white" aria-label="Sidebar">

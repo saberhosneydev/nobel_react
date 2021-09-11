@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-export default function homeHeading() {
+export default function HomeHeading() {
     const router = useRouter();
     function addItemToRecentSearch(item) {
         if (localStorage.getItem('recentSearchItems')) {
