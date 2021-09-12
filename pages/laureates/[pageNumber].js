@@ -119,7 +119,6 @@ export async function getStaticProps({ params }) {
         pageStart = Number(params.pageNumber) - 2;
         pageEnd = Number(params.pageNumber) + 3;
     }
-    console.log(pageStart, pageEnd)
     for (let i = pageStart; i < pageEnd; i++) {
         if (i <= totalPages - 1) {
             pageRange.push(i);

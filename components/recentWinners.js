@@ -1,5 +1,5 @@
 import { FolderIcon } from "@heroicons/react/outline";
-import LaureateCard from "../components/laureateCard";
+import LaureateCard from "./laureateCard";
 export default function RecentWinners({ nobelPrizes }) {
 
     return (

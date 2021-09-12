@@ -1,5 +1,5 @@
-import HomeHeading from "./homeHeading"
-import RecentWinners from "./recentWinners"
+import HomeHeading from "../components/homeHeading"
+import RecentWinners from "../components/recentWinners"
 import nobelPrizes from '../data/nobelPrizes.json'
 export default function Home({ prizes }) {
     return (
