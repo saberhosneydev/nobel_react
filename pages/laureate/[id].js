@@ -113,11 +113,3 @@ export async function getStaticProps({ params }) {
     // Pass post data to the page via props
     return { props: { person } }
 }
-// export async function getServerSideProps(context) {
-//     let url = "https://api.nobelprize.org/2.1/laureate/" + context.params.id;
-//     const response = await axios.get(url);
-//     let person = response.data[0];
-
-//     // Pass data to the page via props
-//     return { props: { person } }
-// }

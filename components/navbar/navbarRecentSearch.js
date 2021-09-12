@@ -2,7 +2,7 @@ import Link from 'next/link'
 export default function NavbarRecentSearch({ recentSearchItems }) {
     return (
         <>
-            {recentSearchItems.length > 0 ? recentSearchItems.map((item, index) => (
+            {(recentSearchItems && recentSearchItems[0] != '') ? recentSearchItems.map((item, index) => (
                 <Link key={index}
                     href={`/search/${item}`} >
                     <a

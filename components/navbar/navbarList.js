@@ -10,7 +10,7 @@ export default function NavbarList() {
     const navigation = [
         { name: 'Home', icon: HomeIcon, href: '/', id: 0 },
         { name: 'Laureates', icon: UsersIcon, href: '/laureates/0', id: 1 },
-        { name: 'Advanced Search', icon: SearchIcon, href: '#', id: 2 },
+        { name: 'Advanced Search', icon: SearchIcon, href: '/advanced', id: 2 },
         { name: 'About', icon: InformationCircleIcon, href: '/about', id: 3 },
     ]
     return (

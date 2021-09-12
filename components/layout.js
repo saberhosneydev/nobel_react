@@ -2,7 +2,7 @@ import Navbar from "./navbar/navbar"
 
 export default function Layout({ children }) {
     return (
-        <div className="bg-gray-100 h-screen flex">
+        <div className="bg-gray-100 h-screen flex font-serif">
             <div className="flex flex-col">
                 <Navbar />
             </div>
